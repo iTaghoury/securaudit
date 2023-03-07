@@ -16,6 +16,9 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/DataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/DataAccess.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/FraisDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/FraisDA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/model/Frais.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/model/Frais.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/AuditeurResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/AuditeurResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,12 +28,25 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="dev" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="dev" />
@@ -68,6 +84,7 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="ProjectId" id="2Mg8heYPgTkP8goMZSzH4KM3xsO" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -81,15 +98,20 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/idris/OneDrive/Documents/Askip j'ai p'tet' trouvé un taf/Formation Mulesoft/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar",
+    "last_opened_file_path": "C:/Users/idris/OneDrive/Documents/Askip j'ai p'tet' trouvé un taf/Formation Mulesoft/7_Validation_mi-parcours",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+<<<<<<< HEAD
     "settings.editor.selected.configurable": "preferences.applicationServers",
+=======
+    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings",
+>>>>>>> 4164a09581f862e4f78470fcec30967497cbeeb7
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -176,6 +198,7 @@
       <option name="presentableId" value="Default" />
       <updated>1678110954840</updated>
       <workItem from="1678110956015" duration="5103000" />
+      <workItem from="1678177989763" duration="5188000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678112215444</created>
@@ -184,7 +207,28 @@
       <option name="project" value="LOCAL" />
       <updated>1678112215444</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Created exception class file for Id not found">
+      <created>1678181257890</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1678181257890</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Created model class Auditeur">
+      <created>1678183304126</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1678183304126</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Created Create query for Auditeur">
+      <created>1678183747137</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1678183747137</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,6 +236,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Created exception class file for Id not found" />
+    <MESSAGE value="Created model class Auditeur" />
+    <MESSAGE value="Created Create query for Auditeur" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created Create query for Auditeur" />
   </component>
 </project>
