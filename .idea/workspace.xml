@@ -9,7 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2db8de0c-0008-44b2-820f-23274902769c" name="Changes" comment="Added Update method for Auditeur">
+    <list default="true" id="2db8de0c-0008-44b2-820f-23274902769c" name="Changes" comment="Added PUT method for Auditeur update + fixed update query method in AuditeurDA">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/AuditeurResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/AuditeurResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" afterDir="false" />
@@ -244,7 +244,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678198230209</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Added PUT method for Auditeur update + fixed update query method in AuditeurDA">
+      <created>1678199188209</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1678199188209</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,6 +277,7 @@
     <MESSAGE value="Changed return type of Read request for Auditeur" />
     <MESSAGE value="Added Get method for Read Auditeur by id" />
     <MESSAGE value="Added Update method for Auditeur" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Update method for Auditeur" />
+    <MESSAGE value="Added PUT method for Auditeur update + fixed update query method in AuditeurDA" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added PUT method for Auditeur update + fixed update query method in AuditeurDA" />
   </component>
 </project>

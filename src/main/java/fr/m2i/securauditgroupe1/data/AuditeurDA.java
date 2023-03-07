@@ -1,7 +1,6 @@
 package fr.m2i.securauditgroupe1.data;
 
 import fr.m2i.securauditgroupe1.exception.IdNotFoundException;
-import fr.m2i.securauditgroupe1.model.Audit;
 import fr.m2i.securauditgroupe1.model.Auditeur;
 
 import java.sql.PreparedStatement;
@@ -17,7 +16,8 @@ public class AuditeurDA extends DataAccess implements AutoCloseable {
     private final String SELECT_AUDITEUR_QUERY = "SELECT * FROM Auditeur";
     private final String SELECT_AUDITEUR_BY_ID = "SELECT * FROM Auditeur WHERE idAuditeur = ?";
     private final String UPDATE_AUDITEUR_QUERY = "UPDATE Auditeur SET civilite = ?, nom = ?, prenom = ? WHERE idAuditeur = ?";
-
+    private final String DELETE_AUDITEUR_QUERY = "DELETE FROM Auditeur WHERE idAuditeur = ?";
+    private final String CHECK_FOR_AUDIT_QUERY = "SELECT * FROM Auditeur INNER JOIN Audit ON Auditeur.idAuditeur = Audit.idAuditeur WHERE Auditeur.idAuditeur = ?";
     //endregion
 
     public AuditeurDA() {
@@ -79,7 +79,7 @@ public class AuditeurDA extends DataAccess implements AutoCloseable {
 
     //region UPDATE QUERY
 
-    public String updateAuditeurById(Auditeur auditeur) throws SQLException {
+    public String updateAuditeur(Auditeur auditeur) throws SQLException {
         if(!(auditeur.getCivilite().equals("M.") || auditeur.getCivilite().equals("Mme"))) {
             throw new SQLException("Valeur de civilité invalide");
         } else {
@@ -93,6 +93,37 @@ public class AuditeurDA extends DataAccess implements AutoCloseable {
                 return String.format("Updated Auditeur with id %d", foundAuditeur.getId());
             } catch (IdNotFoundException e) {
                 return e.getMessage();
+            }
+        }
+    }
+
+    //endregion
+
+    //region DELETE QUERY
+
+    public String deleteAuditeurById(int id) throws IdNotFoundException, SQLException {
+        if(!isUsedAsFK(id)) {
+            try(PreparedStatement ps = this.getConnection().prepareStatement(DELETE_AUDITEUR_QUERY)) {
+                Auditeur foundAuditeur = this.getAuditeurById(id);
+                ps.setInt(1, id);
+                ps.execute();
+                return String.format("Deleted Auditeur with id %d", foundAuditeur.getId());
+            }
+        } else {
+            throw new SQLException("Cannot delete Auditeur, they still have Audits remaining in DB");
+        }
+
+    }
+
+    //endregion
+
+    //region OTHER METHODS
+
+    public boolean isUsedAsFK(int id) throws SQLException{
+        try(PreparedStatement ps = this.getConnection().prepareStatement(CHECK_FOR_AUDIT_QUERY)) {
+            ps.setInt(1, id);
+            try(ResultSet rs = ps.executeQuery()) {
+                return rs.next();
             }
         }
     }

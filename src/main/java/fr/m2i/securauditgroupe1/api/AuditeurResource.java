@@ -83,12 +83,34 @@ public class AuditeurResource {
         try(AuditeurDA da = new AuditeurDA()) {
             return Response
                     .status(Response.Status.OK)
-                    .entity(da.updateAuditeurById(auditeur))
+                    .entity(da.updateAuditeur(auditeur))
                     .build();
         } catch (SQLException e) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
+                    .build();
+        }
+    }
+
+    @DELETE
+    @Path("/delete")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response deleteAuditeur(@QueryParam("id") int id) {
+        try(AuditeurDA da = new AuditeurDA()) {
+            return Response
+                    .status(Response.Status.OK)
+                    .entity(da.deleteAuditeurById(id))
+                    .build();
+        } catch (IdNotFoundException e) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
+        } catch (SQLException e1) {
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity(e1.getMessage())
                     .build();
         }
     }
