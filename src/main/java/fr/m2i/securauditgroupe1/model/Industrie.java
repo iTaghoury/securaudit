@@ -1,16 +1,16 @@
 package fr.m2i.securauditgroupe1.model;
 
 public class Industrie {
-    private int idIndustrie, siret;
-    private String raisonSociale;
+    private int idIndustrie;
+    private String siret, raisonSociale;
 
     //region CONSTRUCTORS
-    public Industrie(int siret, String raisonSociale) {
+    public Industrie(String siret, String raisonSociale) {
         this.siret = siret;
         this.raisonSociale = raisonSociale;
     }
 
-    public Industrie(int idIndustrie, int siret, String raisonSociale) {
+    public Industrie(int idIndustrie, String siret, String raisonSociale) {
         this.idIndustrie = idIndustrie;
         this.siret = siret;
         this.raisonSociale = raisonSociale;
@@ -25,11 +25,11 @@ public class Industrie {
         this.idIndustrie = idIndustrie;
     }
 
-    public int getSiret() {
+    public String getSiret() {
         return siret;
     }
 
-    public void setSiret(int siret) {
+    public void setSiret(String siret) {
         this.siret = siret;
     }
 
