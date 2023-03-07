@@ -14,6 +14,8 @@ public class IndustrieDA extends DataAccess implements AutoCloseable {
     private final String SELECT_INDUSTRIE_QUERY = "SELECT * FROM Industrie";
     private final String SELECT_INDUSTRIE_BY_ID = "SELECT * FROM Industrie WHERE idIndustrie = ?";
     private final String UPDATE_INDUSTRIE_QUERY = "UPDATE industrie SET siret = ?, raisonSociale = ? WHERE idIndustrie = ?";
+    private final String DELETE_INDUSTRIE_QUERY = "DELETE FROM Industrie WHERE idIndustrie = ?";
+    private final String CHECK_FOR_INDUSTRIE_QUERY = "SELECT * FROM Industrie INNER JOIN Audit ON Industrie.idIndustrie = Audit.idIndustrie INNER JOIN Frais ON Audit.idAudit = Frais.idAudit WHERE Industrie.idIndustrie = ?";
     //endregion
 
     //region CONSTRUCTOR
@@ -84,6 +86,21 @@ public class IndustrieDA extends DataAccess implements AutoCloseable {
             throw new IdNotFoundException("Id not found");
         }
     }
+
+    public void deleteIndustrie(int idIndustrie) throws IdNotFoundException, SQLException {
+        if(isInDB(idIndustrie)) {
+            if(isUsed(idIndustrie)) {
+                throw new SQLException("Industrie used in database, cannot delete it.");
+            } else {
+                try(PreparedStatement ps = this.getConnection().prepareStatement(DELETE_INDUSTRIE_QUERY)) {
+                    ps.setInt(1, idIndustrie);
+                    ps.execute();
+                }
+            }
+        } else {
+            throw new IdNotFoundException("Id not found");
+        }
+    }
     //endregion
 
     //region DELETE INDUSTRIE
@@ -99,6 +116,18 @@ public class IndustrieDA extends DataAccess implements AutoCloseable {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
+        }
+    }
+
+    public boolean isUsed(int idIndustrie) throws SQLException {
+        try(PreparedStatement ps = this.getConnection().prepareStatement(CHECK_FOR_INDUSTRIE_QUERY)) {
+            ps.setInt(1, idIndustrie);
+            try(ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
         }
     }
     //endregion

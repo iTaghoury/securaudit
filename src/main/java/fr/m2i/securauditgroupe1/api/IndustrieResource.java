@@ -91,6 +91,27 @@ public class IndustrieResource {
         }
     }
 
+    @DELETE
+    @Path("/delete")
+    public Response deleteIndustrie(@QueryParam("id") int idIndustrie) {
+        try (IndustrieDA da = new IndustrieDA()) {
+            da.deleteIndustrie(idIndustrie);
+            return Response
+                    .status(Response.Status.OK)
+                    .entity(String.format("Industrie %d deleted", idIndustrie))
+                    .build();
+        } catch (IdNotFoundException e1) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(e1.getMessage())
+                    .build();
+        } catch (SQLException e2) {
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity(e2.getMessage())
+                    .build();
+        }
+    }
 
 
 
