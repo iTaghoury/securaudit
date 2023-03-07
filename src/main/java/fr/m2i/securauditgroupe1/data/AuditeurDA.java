@@ -1,5 +1,7 @@
 package fr.m2i.securauditgroupe1.data;
 
+import fr.m2i.securauditgroupe1.exception.IdNotFoundException;
+import fr.m2i.securauditgroupe1.model.Audit;
 import fr.m2i.securauditgroupe1.model.Auditeur;
 
 import java.sql.PreparedStatement;
@@ -12,6 +14,7 @@ public class AuditeurDA extends DataAccess implements AutoCloseable {
 
     private final String INSERT_AUDITEUR_QUERY = "INSERT INTO Auditeur (civilite, nom, prenom) VALUE (?, ?, ?)";
     private final String SELECT_AUDITEUR_QUERY = "SELECT * FROM Auditeur";
+    private final String SELECT_AUDITEUR_BY_ID = "SELECT * FROM Auditeur WHERE idAuditeur = ?";
 
     //endregion
 
@@ -53,6 +56,21 @@ public class AuditeurDA extends DataAccess implements AutoCloseable {
             }
         }
     }
+
+    public Auditeur getAuditeurById(int id) throws IdNotFoundException, SQLException {
+        try(PreparedStatement ps = this.getConnection().prepareStatement(SELECT_AUDITEUR_BY_ID)) {
+            ps.setInt(1, id);
+            try(ResultSet rs = ps.executeQuery()) {
+                if(rs.next()) {
+                    Auditeur auditeur = new Auditeur(rs.getInt("idAuditeur"), rs.getString("civilite"), rs.getString("nom"), rs.getString("prenom"));
+                    return auditeur;
+                } else {
+                    throw new IdNotFoundException("Auditeur Id not found.");
+                }
+            }
+        }
+    }
+
 
     //endregion
 
