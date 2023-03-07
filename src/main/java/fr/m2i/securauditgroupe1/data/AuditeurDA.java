@@ -16,6 +16,7 @@ public class AuditeurDA extends DataAccess implements AutoCloseable {
     private final String INSERT_AUDITEUR_QUERY = "INSERT INTO Auditeur (civilite, nom, prenom) VALUE (?, ?, ?)";
     private final String SELECT_AUDITEUR_QUERY = "SELECT * FROM Auditeur";
     private final String SELECT_AUDITEUR_BY_ID = "SELECT * FROM Auditeur WHERE idAuditeur = ?";
+    private final String UPDATE_AUDITEUR_QUERY = "UPDATE Auditeur SET civilite = ?, nom = ?, prenom = ? WHERE idAuditeur = ?";
 
     //endregion
 
@@ -73,6 +74,23 @@ public class AuditeurDA extends DataAccess implements AutoCloseable {
         }
     }
 
+
+    //endregion
+
+    //region UPDATE QUERY
+
+    public String updateAuditeurById(Auditeur auditeur) throws SQLException {
+        try (PreparedStatement ps = this.getConnection().prepareStatement(UPDATE_AUDITEUR_QUERY)){
+            Auditeur foundAuditeur = this.getAuditeurById(auditeur.getId());
+            ps.setString(1, foundAuditeur.getCivilite());
+            ps.setString(2, foundAuditeur.getNom());
+            ps.setString(3, foundAuditeur.getPrenom());
+            ps.execute();
+            return String.format("Updated Auditeur with id %d", foundAuditeur.getId());
+        } catch (IdNotFoundException e) {
+            return e.getMessage();
+        }
+    }
 
     //endregion
 

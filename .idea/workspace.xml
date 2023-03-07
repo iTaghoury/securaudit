@@ -9,9 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2db8de0c-0008-44b2-820f-23274902769c" name="Changes" comment="Changed return type of Read request for Auditeur">
+    <list default="true" id="2db8de0c-0008-44b2-820f-23274902769c" name="Changes" comment="Added Get method for Read Auditeur by id">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/AuditeurResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/AuditeurResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -229,7 +229,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678196577612</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added Get method for Read Auditeur by id">
+      <created>1678196992099</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1678196992099</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,6 +260,7 @@
     <MESSAGE value="Created Create query for Auditeur" />
     <MESSAGE value="Added Read by id request for Auditeur" />
     <MESSAGE value="Changed return type of Read request for Auditeur" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed return type of Read request for Auditeur" />
+    <MESSAGE value="Added Get method for Read Auditeur by id" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Get method for Read Auditeur by id" />
   </component>
 </project>
