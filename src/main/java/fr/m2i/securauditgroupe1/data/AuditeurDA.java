@@ -23,11 +23,15 @@ public class AuditeurDA extends DataAccess implements AutoCloseable {
     //region CREATE QUERY
 
     public void addAuditeurToDB(Auditeur auditeur) throws SQLException {
-        try(PreparedStatement ps = this.getConnection().prepareStatement(INSERT_AUDITEUR_QUERY))  {
-            ps.setString(1, auditeur.getCivilite());
-            ps.setString(2, auditeur.getNom());
-            ps.setString(3, auditeur.getPrenom());
-            ps.execute();
+        if(!(auditeur.getCivilite().equals("M.") || auditeur.getCivilite().equals("Mme"))) {
+            throw new SQLException("Valeur de civilité invalide");
+        } else {
+            try(PreparedStatement ps = this.getConnection().prepareStatement(INSERT_AUDITEUR_QUERY))  {
+                ps.setString(1, auditeur.getCivilite());
+                ps.setString(2, auditeur.getNom());
+                ps.setString(3, auditeur.getPrenom());
+                ps.execute();
+            }
         }
     }
 
