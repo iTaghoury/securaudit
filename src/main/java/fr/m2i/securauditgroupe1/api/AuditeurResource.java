@@ -71,4 +71,26 @@ public class AuditeurResource {
         }
     }
 
+    @PUT
+    @Path("/update")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response updateAuditeur(@QueryParam("id") int id,
+                                   @FormParam("civilite") String civilite,
+                                   @FormParam("nom") String nom,
+                                   @FormParam("prenom") String prenom)
+    {
+        Auditeur auditeur = new Auditeur(id, civilite, nom, prenom);
+        try(AuditeurDA da = new AuditeurDA()) {
+            return Response
+                    .status(Response.Status.OK)
+                    .entity(da.updateAuditeurById(auditeur))
+                    .build();
+        } catch (SQLException e) {
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity(e.getMessage())
+                    .build();
+        }
+    }
+
 }

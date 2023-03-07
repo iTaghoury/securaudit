@@ -80,15 +80,20 @@ public class AuditeurDA extends DataAccess implements AutoCloseable {
     //region UPDATE QUERY
 
     public String updateAuditeurById(Auditeur auditeur) throws SQLException {
-        try (PreparedStatement ps = this.getConnection().prepareStatement(UPDATE_AUDITEUR_QUERY)){
-            Auditeur foundAuditeur = this.getAuditeurById(auditeur.getId());
-            ps.setString(1, foundAuditeur.getCivilite());
-            ps.setString(2, foundAuditeur.getNom());
-            ps.setString(3, foundAuditeur.getPrenom());
-            ps.execute();
-            return String.format("Updated Auditeur with id %d", foundAuditeur.getId());
-        } catch (IdNotFoundException e) {
-            return e.getMessage();
+        if(!(auditeur.getCivilite().equals("M.") || auditeur.getCivilite().equals("Mme"))) {
+            throw new SQLException("Valeur de civilité invalide");
+        } else {
+            try (PreparedStatement ps = this.getConnection().prepareStatement(UPDATE_AUDITEUR_QUERY)) {
+                Auditeur foundAuditeur = this.getAuditeurById(auditeur.getId());
+                ps.setString(1, auditeur.getCivilite());
+                ps.setString(2, auditeur.getNom());
+                ps.setString(3, auditeur.getPrenom());
+                ps.setInt(4, auditeur.getId());
+                ps.execute();
+                return String.format("Updated Auditeur with id %d", foundAuditeur.getId());
+            } catch (IdNotFoundException e) {
+                return e.getMessage();
+            }
         }
     }
 

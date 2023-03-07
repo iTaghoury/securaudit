@@ -9,8 +9,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2db8de0c-0008-44b2-820f-23274902769c" name="Changes" comment="Added Get method for Read Auditeur by id">
+    <list default="true" id="2db8de0c-0008-44b2-820f-23274902769c" name="Changes" comment="Added Update method for Auditeur">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/AuditeurResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/AuditeurResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -236,7 +237,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678196992099</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Added Update method for Auditeur">
+      <created>1678198230209</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1678198230209</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -261,6 +269,7 @@
     <MESSAGE value="Added Read by id request for Auditeur" />
     <MESSAGE value="Changed return type of Read request for Auditeur" />
     <MESSAGE value="Added Get method for Read Auditeur by id" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Get method for Read Auditeur by id" />
+    <MESSAGE value="Added Update method for Auditeur" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Update method for Auditeur" />
   </component>
 </project>
