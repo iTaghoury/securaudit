@@ -15,7 +15,7 @@ public class IndustrieDA extends DataAccess implements AutoCloseable {
     private final String SELECT_INDUSTRIE_BY_ID = "SELECT * FROM Industrie WHERE idIndustrie = ?";
     private final String UPDATE_INDUSTRIE_QUERY = "UPDATE industrie SET siret = ?, raisonSociale = ? WHERE idIndustrie = ?";
     private final String DELETE_INDUSTRIE_QUERY = "DELETE FROM Industrie WHERE idIndustrie = ?";
-    private final String CHECK_FOR_INDUSTRIE_QUERY = "SELECT * FROM Industrie INNER JOIN Audit ON Industrie.idIndustrie = Audit.idIndustrie INNER JOIN Frais ON Audit.idAudit = Frais.idAudit WHERE Industrie.idIndustrie = ?";
+    private final String CHECK_FOR_INDUSTRIE_QUERY = "SELECT * FROM Industrie INNER JOIN Audit ON Industrie.idIndustrie = Audit.idIndustrie WHERE Industrie.idIndustrie = ?";
     //endregion
 
     //region CONSTRUCTOR
@@ -73,14 +73,11 @@ public class IndustrieDA extends DataAccess implements AutoCloseable {
     //region UPDATE INDUSTRIE
     public void updateIndustrie(Industrie industrie) throws IdNotFoundException, SQLException {
         if(isInDB(industrie.getIdIndustrie())) {
-            try {
-                PreparedStatement ps = this.getConnection().prepareStatement(UPDATE_INDUSTRIE_QUERY);
+            try (PreparedStatement ps = this.getConnection().prepareStatement(UPDATE_INDUSTRIE_QUERY)){
                 ps.setString(1, industrie.getSiret());
                 ps.setString(2, industrie.getRaisonSociale());
                 ps.setInt(3, industrie.getIdIndustrie());
                 ps.execute();
-            } catch (SQLException e){
-                System.out.println(e.getMessage());
             }
         } else {
             throw new IdNotFoundException("Id not found");
