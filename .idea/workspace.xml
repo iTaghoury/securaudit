@@ -9,14 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2db8de0c-0008-44b2-820f-23274902769c" name="Changes" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/HelloResource.java" afterDir="false" />
+    <list default="true" id="2db8de0c-0008-44b2-820f-23274902769c" name="Changes" comment="Implemented and tested DB connection with Read method for Auditeur">
+      <change afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/exception/IdNotFoundException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/AuditeurResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/AuditeurResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/DataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/DataAccess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/domain/SecurauditApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/domain/SecurauditApplication.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +30,19 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="dev" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
         <entry key="$PROJECT_DIR$" value="main" />
@@ -56,6 +67,7 @@
       </MavenImportingSettings>
     </option>
   </component>
+  <component name="ProjectId" id="2Mg8heYPgTkP8goMZSzH4KM3xsO" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
@@ -69,14 +81,16 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/idris/OneDrive/Documents/Askip j'ai p'tet' trouvé un taf/Formation Mulesoft/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar",
+    "last_opened_file_path": "C:/Users/idris/OneDrive/Documents/Askip j'ai p'tet' trouvé un taf/Formation Mulesoft/7_Validation_mi-parcours",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -163,6 +177,7 @@
       <option name="presentableId" value="Default" />
       <updated>1678110954840</updated>
       <workItem from="1678110956015" duration="5103000" />
+      <workItem from="1678177989763" duration="2163000" />
     </task>
     <task id="LOCAL-00001" summary="Initial commit">
       <created>1678112215444</created>
