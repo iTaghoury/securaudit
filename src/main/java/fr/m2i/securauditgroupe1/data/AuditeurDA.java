@@ -7,6 +7,7 @@ import fr.m2i.securauditgroupe1.model.Auditeur;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class AuditeurDA extends DataAccess implements AutoCloseable {
 
@@ -42,17 +43,18 @@ public class AuditeurDA extends DataAccess implements AutoCloseable {
 
     //region READ QUERIES
 
-    public StringBuilder getAuditeurFromDB() throws SQLException {
-        StringBuilder sb = new StringBuilder();
+    public ArrayList<Auditeur> getAuditeurFromDB() throws SQLException {
+        ArrayList<Auditeur> auditeurs = new ArrayList<>();
         try(PreparedStatement ps = this.getConnection().prepareStatement(SELECT_AUDITEUR_QUERY);
             ResultSet rs = ps.executeQuery()) {
             if(rs.next()) {
                 do {
-                    sb.append(String.format("Nom %s, Prenom %s\n", rs.getString(2), rs.getString(3)));
+                    Auditeur auditeur = new Auditeur(rs.getInt("idAuditeur"), rs.getString("civilite"), rs.getString("nom"), rs.getString("prenom"));
+                    auditeurs.add(auditeur);
                 } while(rs.next());
-                return sb;
+                return auditeurs;
             } else {
-                return null;
+                throw new SQLException("Empty Auditeur table");
             }
         }
     }

@@ -9,8 +9,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2db8de0c-0008-44b2-820f-23274902769c" name="Changes" comment="modified type for siret attribute (int --&gt; String)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="2db8de0c-0008-44b2-820f-23274902769c" name="Changes" comment="Added Read by id request for Auditeur">
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -215,7 +214,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678183747137</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added Read by id request for Auditeur">
+      <created>1678196394937</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1678196394937</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -237,6 +243,7 @@
     <MESSAGE value="Created exception class file for Id not found" />
     <MESSAGE value="Created model class Auditeur" />
     <MESSAGE value="Created Create query for Auditeur" />
-    <option name="LAST_COMMIT_MESSAGE" value="Created Create query for Auditeur" />
+    <MESSAGE value="Added Read by id request for Auditeur" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Read by id request for Auditeur" />
   </component>
 </project>
