@@ -9,10 +9,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2db8de0c-0008-44b2-820f-23274902769c" name="Changes" comment="Added PUT method for Auditeur update + fixed update query method in AuditeurDA">
+    <list default="true" id="2db8de0c-0008-44b2-820f-23274902769c" name="Changes" comment="modified type for siret attribute (int --&gt; String)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/AuditeurResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/AuditeurResource.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/IndustrieResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/IndustrieResource.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/DataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/DataAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/IndustrieDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/IndustrieDA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/model/Industrie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/model/Industrie.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,6 +63,9 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/model/Industrie.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -86,26 +91,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/idris/OneDrive/Documents/Askip j'ai p'tet' trouvé un taf/Formation Mulesoft/mysql-connector-j-8.0.32/mysql-connector-j-8.0.32.jar",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/idris/OneDrive/Documents/Askip j'ai p'tet' trouvé un taf/Formation Mulesoft/7_Validation_mi-parcours&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.applicationServers&quot;,
+=======
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.Mappings&quot;,
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 4164a09581f862e4f78470fcec30967497cbeeb7
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
-    <configuration name="GlassFish 6.2023.2" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 6.2023.2" ALTERNATIVE_JRE_ENABLED="false">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/securaudit-groupe-1-1.0-SNAPSHOT/api/frais/select" />
+    <configuration name="GlassFish 6.2023.2" type="GlassfishConfiguration" factoryName="Local" APPLICATION_SERVER_NAME="GlassFish 6.2.5" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/securaudit-groupe-1-1.0-SNAPSHOT/api" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="securaudit-groupe-1:war exploded">
@@ -216,42 +227,7 @@
       <option name="project" value="LOCAL" />
       <updated>1678183747137</updated>
     </task>
-    <task id="LOCAL-00005" summary="Added Read by id request for Auditeur">
-      <created>1678196394937</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1678196394937</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Changed return type of Read request for Auditeur">
-      <created>1678196577612</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1678196577612</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Added Get method for Read Auditeur by id">
-      <created>1678196992099</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1678196992099</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Added Update method for Auditeur">
-      <created>1678198230209</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1678198230209</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Added PUT method for Auditeur update + fixed update query method in AuditeurDA">
-      <created>1678199188209</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1678199188209</updated>
-    </task>
-    <option name="localTasksCounter" value="10" />
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -260,9 +236,15 @@
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
-        <entry key="MAIN">
+        <entry key="4981b8a7-b9d3-48b5-aca5-47c4eeb53592">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="false" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -273,11 +255,6 @@
     <MESSAGE value="Created exception class file for Id not found" />
     <MESSAGE value="Created model class Auditeur" />
     <MESSAGE value="Created Create query for Auditeur" />
-    <MESSAGE value="Added Read by id request for Auditeur" />
-    <MESSAGE value="Changed return type of Read request for Auditeur" />
-    <MESSAGE value="Added Get method for Read Auditeur by id" />
-    <MESSAGE value="Added Update method for Auditeur" />
-    <MESSAGE value="Added PUT method for Auditeur update + fixed update query method in AuditeurDA" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added PUT method for Auditeur update + fixed update query method in AuditeurDA" />
+    <option name="LAST_COMMIT_MESSAGE" value="Created Create query for Auditeur" />
   </component>
 </project>
