@@ -13,6 +13,7 @@ public class IndustrieDA extends DataAccess implements AutoCloseable {
     private final String INSERT_INDUSTRIE_QUERY = "INSERT INTO Industrie (siret, raisonSociale) VALUE (?, ?)";
     private final String SELECT_INDUSTRIE_QUERY = "SELECT * FROM Industrie";
     private final String SELECT_INDUSTRIE_BY_ID = "SELECT * FROM Industrie WHERE idIndustrie = ?";
+    private final String UPDATE_INDUSTRIE_QUERY = "UPDATE industrie SET siret = ?, raisonSociale = ? WHERE idIndustrie = ?";
     //endregion
 
     //region CONSTRUCTOR
@@ -68,11 +69,37 @@ public class IndustrieDA extends DataAccess implements AutoCloseable {
     //endregion
 
     //region UPDATE INDUSTRIE
+    public void updateIndustrie(Industrie industrie) throws IdNotFoundException, SQLException {
+        if(isInDB(industrie.getIdIndustrie())) {
+            try {
+                PreparedStatement ps = this.getConnection().prepareStatement(UPDATE_INDUSTRIE_QUERY);
+                ps.setString(1, industrie.getSiret());
+                ps.setString(2, industrie.getRaisonSociale());
+                ps.setInt(3, industrie.getIdIndustrie());
+                ps.execute();
+            } catch (SQLException e){
+                System.out.println(e.getMessage());
+            }
+        } else {
+            throw new IdNotFoundException("Id not found");
+        }
+    }
     //endregion
 
     //region DELETE INDUSTRIE
     //endregion
 
     //region OTHER METHODS
+    public boolean isInDB(int idIndustrie) {
+        try (PreparedStatement ps = this.getConnection().prepareStatement(SELECT_INDUSTRIE_BY_ID)) {
+            ps.setInt(1, idIndustrie);
+            try(ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
     //endregion
 }

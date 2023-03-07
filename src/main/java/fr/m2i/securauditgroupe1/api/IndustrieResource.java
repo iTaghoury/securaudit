@@ -68,6 +68,29 @@ public class IndustrieResource {
         }
     }
 
+    @PUT
+    @Path("/update")
+    public Response updateIndustrie(@QueryParam("id") int idIndustrie, @FormParam("siret") String siret, @FormParam("raisonSociale") String raisonSociale) {
+        Industrie industrie = new Industrie(idIndustrie, siret, raisonSociale);
+        try (IndustrieDA da = new IndustrieDA()) {
+            da.updateIndustrie(industrie);
+            return Response
+                    .status(Response.Status.OK)
+                    .entity(industrie)
+                    .build();
+        } catch (IdNotFoundException e1) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(e1.getMessage())
+                    .build();
+        } catch (SQLException e2) {
+            return Response
+                    .status(Response.Status.BAD_REQUEST)
+                    .entity(e2.getMessage())
+                    .build();
+        }
+    }
+
 
 
 
