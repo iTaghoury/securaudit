@@ -1,5 +1,6 @@
 package fr.m2i.securauditgroupe1.api;
 
+import fr.m2i.securauditgroupe1.exception.IdNotFoundException;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import fr.m2i.securauditgroupe1.data.AuditDA;
@@ -33,9 +34,16 @@ public class AuditResource {
    @GET
    @Path("/auditparid/{auditId}")
    @Produces(MediaType.APPLICATION_JSON)
-   public String Todoutilisateur(@PathParam("auditId") int auditId) {
+   public String getAuditparId(@PathParam("auditId") int auditId) {
       StringBuilder result = new StringBuilder();
-      result.append(auditDA.AuditparId(auditId));
+      try(AuditDA da = new AuditDA()) {
+         result.append(da.AuditparId(auditId));
+      } catch (IdNotFoundException e) {
+         return e.getMessage();
+      }
+      catch (SQLException e) {
+         return e.getMessage();
+      }
       return result.toString();
    }
 
@@ -56,12 +64,26 @@ public class AuditResource {
    }
 
    @PUT
-   @Path("/update/{coutjrs}/{auditId}")
+   @Path("/update")
    @Produces(MediaType.APPLICATION_JSON)
-   public Response updateAuditREST(@PathParam("auditId") int auditId, @PathParam("coutjrs") int coutjrs) {
+   public Response updateAuditREST(@FormParam("auditId") int auditId,
+                                   @FormParam("dateAudit") Date dateaudit,
+                                   @FormParam("dureeAudit") int dureeaudit,
+                                   @FormParam("coutAudit") int coutaudit,
+                                   @FormParam("Idindustrie") int idindustrie,
+                                   @FormParam("IdAuditeur") int idAuditeur) {
+      Audit audit = new Audit(auditId,dateaudit,dureeaudit,coutaudit,idindustrie,idAuditeur);
       try (AuditDA da = new AuditDA()) {
-         da.updateAudit(coutjrs, auditId);
-         return Response.ok().build();
+         da.updateAudit(audit);
+         return Response
+                 .status(Response.Status.OK)
+                 .entity(String.format("Updated Audit with Id %d",auditId))
+                 .build();
+      } catch (IdNotFoundException e){
+         return Response
+                 .status(Response.Status.NOT_FOUND)
+                 .entity(e.getMessage())
+                 .build();
       } catch (SQLException e) {
          return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
       }
