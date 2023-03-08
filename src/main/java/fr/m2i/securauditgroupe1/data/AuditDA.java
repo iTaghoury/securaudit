@@ -10,14 +10,13 @@ import java.util.List;
 public class AuditDA extends DataAccess {
 
     private static final String SELECT_AUDIT = "SELECT * FROM audit";
-    private static final String SELECT_AUDIT_parId = "SELECT * FROM audit WHERE idAudit = ?";
-    private static final String INSERT_AUDIT = "INSERT INTO audit (dateAudit,dureeAudit,coutJour,idIndustrie,idAuditeur)" +
-            "VALUE(?,?,?,?,?)";
+    private static final String SELECT_AUDIT_BY_ID = "SELECT * FROM audit WHERE idAudit = ?";
+    private static final String INSERT_AUDIT = "INSERT INTO audit (dateAudit,dureeAudit,coutJour,idIndustrie,idAuditeur) VALUE(?,?,?,?,?)";
     private static final String UPDATE_AUDIT = "UPDATE audit SET coutJour = ? WHERE idAudit = ?";
     private static final String DELETE_AUDIT = "DELETE FROM audit where idAudit = ?";
 
-    public AuditDA() throws SQLException {
-    }
+    public AuditDA() {}
+
 
     public String getAllAudits() {
 
@@ -47,7 +46,7 @@ public class AuditDA extends DataAccess {
     public  String AuditparId(int userId) {
         StringBuilder str = new StringBuilder();
         try (Connection conn = getConnection()) {
-            PreparedStatement prs = conn.prepareStatement(SELECT_AUDIT_parId);
+            PreparedStatement prs = conn.prepareStatement(SELECT_AUDIT_BY_ID);
             prs.setInt(1, userId);
             ResultSet rs = prs.executeQuery();
             while (rs.next()) {

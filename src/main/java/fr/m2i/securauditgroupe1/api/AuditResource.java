@@ -11,16 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-@Path("/execute")
+@Path("/audit")
 public class AuditResource {
 
    private AuditDA auditDA = new AuditDA();
 
-   public AuditResource() throws SQLException {
-   }
-
    @GET
-   @Path("/audits")
    @Produces(MediaType.APPLICATION_JSON)
    public String getAllAudits() {
       StringBuilder str = new StringBuilder();
@@ -31,9 +27,9 @@ public class AuditResource {
    }
 
    @GET
-   @Path("/auditparid/{auditId}")
+   @Path("/{auditId}")
    @Produces(MediaType.APPLICATION_JSON)
-   public String Todoutilisateur(@PathParam("auditId") int auditId) {
+   public String getAuditById(@PathParam("auditId") int auditId) {
       StringBuilder result = new StringBuilder();
       result.append(auditDA.AuditparId(auditId));
       return result.toString();
@@ -56,7 +52,7 @@ public class AuditResource {
    }
 
    @PUT
-   @Path("/update/{coutjrs}/{auditId}")
+   @Path("/update/{auditId}/{coutjrs}")
    @Produces(MediaType.APPLICATION_JSON)
    public Response updateAuditREST(@PathParam("auditId") int auditId, @PathParam("coutjrs") int coutjrs) {
       try (AuditDA da = new AuditDA()) {
