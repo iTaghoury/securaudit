@@ -14,7 +14,7 @@ public class AuditDA extends DataAccess {
     private static final String INSERT_AUDIT = "INSERT INTO Audit (dateAudit,dureeAudit,coutJour,idIndustrie,idAuditeur) VALUE(?,?,?,?,?)";
     private static final String UPDATE_AUDIT = "UPDATE Audit SET dateAudit = ? , dureeAudit = ?, coutJour = ?, idIndustrie = ?,idAuditeur = ? WHERE idAudit = ?";
     private static final String DELETE_AUDIT_BYID = "DELETE FROM audit where idAudit = ?";
-    private final String CHECK_FOR_FRAIS_QUERY = "SELECT * FROM Audit INNER JOIN Frais ON Audit.idAudit = Frais.idAudit WHERE Audit.idAudit = ?";
+    private static final String CHECK_FOR_FRAIS_QUERY = "SELECT * FROM Audit INNER JOIN Frais ON Audit.idAudit = Frais.idAudit WHERE Audit.idAudit = ?";
 
     //endregion
 
