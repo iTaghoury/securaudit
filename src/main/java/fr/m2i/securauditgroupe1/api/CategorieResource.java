@@ -37,10 +37,16 @@ public class CategorieResource {
                     .status(Response.Status.OK)
                     .entity(da.selectByIdCategorie(id))
                     .build();
-        } catch (SQLException| IdNotFoundException e) {
+        } catch (IdNotFoundException e) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
+        }
+        catch (SQLException e1) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
-                    .entity(e.getMessage())
+                    .entity(e1.getMessage())
                     .build();
         }
     }
@@ -53,10 +59,15 @@ public class CategorieResource {
                     .status(Response.Status.OK)
                     .entity(da.deleteCategorie(id))
                     .build();
-        } catch (SQLException| IdNotFoundException e) {
+        } catch (IdNotFoundException e) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
+        } catch (SQLException e1) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
-                    .entity(e.getMessage())
+                    .entity(e1.getMessage())
                     .build();
         }
     }
@@ -89,10 +100,15 @@ public class CategorieResource {
                     .status(Response.Status.OK)
                     .entity(da.updateCategorie(Categorie,id))
                     .build();
-        } catch (SQLException | IdNotFoundException e) {
+        } catch (IdNotFoundException e) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
+        } catch (SQLException e1) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
-                    .entity(e.getMessage())
+                    .entity(e1.getMessage())
                     .build();
         }
     }

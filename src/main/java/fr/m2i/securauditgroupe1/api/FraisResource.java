@@ -20,10 +20,10 @@ public class FraisResource {
                     .status(Response.Status.OK)
                     .entity(da.selectFrais())
                     .build();
-        } catch (SQLException | IdNotFoundException e) {
+        } catch (SQLException e1) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
-                    .entity(e.getMessage())
+                    .entity(e1.getMessage())
                     .build();
         }
     }
@@ -37,10 +37,15 @@ public class FraisResource {
                     .status(Response.Status.OK)
                     .entity(da.selectByIdFrais(id))
                     .build();
-        } catch (SQLException | IdNotFoundException e) {
+        } catch (IdNotFoundException e) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
+        } catch (SQLException e1) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
-                    .entity(e.getMessage())
+                    .entity(e1.getMessage())
                     .build();
         }
     }
@@ -53,10 +58,15 @@ public class FraisResource {
                     .status(Response.Status.OK)
                     .entity(da.deleteFrais(id))
                     .build();
-        } catch (SQLException| IdNotFoundException  e) {
+        } catch (IdNotFoundException e) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
+        } catch (SQLException e1) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
-                    .entity(e.getMessage())
+                    .entity(e1.getMessage())
                     .build();
         }
     }
@@ -71,7 +81,7 @@ public class FraisResource {
                     .status(Response.Status.OK)
                     .entity(da.insertionFrais(frais))
                     .build();
-        } catch (SQLException | IdNotFoundException e) {
+        } catch (SQLException e) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
@@ -89,10 +99,15 @@ public class FraisResource {
                     .status(Response.Status.OK)
                     .entity(da.updateFrais(frais,id))
                     .build();
-        } catch (SQLException | IdNotFoundException e) {
+        } catch (IdNotFoundException e) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
+        } catch (SQLException e1) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
-                    .entity(e.getMessage())
+                    .entity(e1.getMessage())
                     .build();
         }
     }

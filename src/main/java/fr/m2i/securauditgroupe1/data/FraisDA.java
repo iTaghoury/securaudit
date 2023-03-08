@@ -21,7 +21,7 @@ public class FraisDA extends DataAccess  implements AutoCloseable {
     private String SELECT_BY_ID_FRAIS_QUERY = "SELECT * FROM frais WHERE idFrais = ?";
 
 
-    public String  insertionFrais(Frais frais) throws SQLException, IdNotFoundException {
+    public String  insertionFrais(Frais frais) throws SQLException {
         String s = "";
         int i = 0;
 
@@ -44,7 +44,7 @@ public class FraisDA extends DataAccess  implements AutoCloseable {
 
     }
 
-    public ArrayList<Frais> selectFrais() throws SQLException, IdNotFoundException {
+    public ArrayList<Frais> selectFrais() throws SQLException {
 
         ArrayList<Frais> frais = new ArrayList<Frais>();
 
