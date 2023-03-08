@@ -1,6 +1,7 @@
 package fr.m2i.securauditgroupe1.api;
 
 import fr.m2i.securauditgroupe1.data.FraisDA;
+import fr.m2i.securauditgroupe1.exception.IdNotFoundException;
 import fr.m2i.securauditgroupe1.model.Frais;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -19,10 +20,10 @@ public class FraisResource {
                     .status(Response.Status.OK)
                     .entity(da.selectFrais())
                     .build();
-        } catch (SQLException e) {
+        } catch (SQLException e1) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
-                    .entity(e.getMessage())
+                    .entity(e1.getMessage())
                     .build();
         }
     }
@@ -36,10 +37,15 @@ public class FraisResource {
                     .status(Response.Status.OK)
                     .entity(da.selectByIdFrais(id))
                     .build();
-        } catch (SQLException e) {
+        } catch (IdNotFoundException e) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
+        } catch (SQLException e1) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
-                    .entity(e.getMessage())
+                    .entity(e1.getMessage())
                     .build();
         }
     }
@@ -52,10 +58,15 @@ public class FraisResource {
                     .status(Response.Status.OK)
                     .entity(da.deleteFrais(id))
                     .build();
-        } catch (SQLException e) {
+        } catch (IdNotFoundException e) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
+        } catch (SQLException e1) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
-                    .entity(e.getMessage())
+                    .entity(e1.getMessage())
                     .build();
         }
     }
@@ -88,10 +99,15 @@ public class FraisResource {
                     .status(Response.Status.OK)
                     .entity(da.updateFrais(frais,id))
                     .build();
-        } catch (SQLException e) {
+        } catch (IdNotFoundException e) {
+            return Response
+                    .status(Response.Status.NOT_FOUND)
+                    .entity(e.getMessage())
+                    .build();
+        } catch (SQLException e1) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
-                    .entity(e.getMessage())
+                    .entity(e1.getMessage())
                     .build();
         }
     }
