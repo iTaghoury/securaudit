@@ -13,9 +13,14 @@ public class AuditDA extends DataAccess {
     private static final String SELECT_AUDIT_parId = "SELECT * FROM audit WHERE idAudit = ?";
     private static final String INSERT_AUDIT = "INSERT INTO audit (dateAudit,dureeAudit,coutJour,idIndustrie,idAuditeur)" +
             "VALUE(?,?,?,?,?)";
+    private static final String UPDATE_AUDIT = "UPDATE audit SET coutJour = ? WHERE idAudit = ?";
+    private static final String DELETE_AUDIT = "DELETE FROM audit where idAudit = ?";
+
+    public AuditDA() throws SQLException {
+    }
 
     public String getAllAudits() {
-       // ArrayList<Audit> audits = new ArrayList<>();
+
         StringBuilder result = new StringBuilder();
         try (
              PreparedStatement stmt = this.getConnection().prepareStatement(SELECT_AUDIT);
@@ -72,6 +77,43 @@ public class AuditDA extends DataAccess {
             prs.setInt(5, audit.getIdAuditeur());
             prs.executeUpdate();
             return Response.ok("L'Audit a été ajoutée : ").build().toString();
+        }
+    }
+    public String updateAudit(int coutjrs, int auditId) throws SQLException {
+        StringBuilder str = new StringBuilder();
+        try (
+                Connection conn = getConnection()
+        ) {
+            if (conn == null) {
+                throw new SQLException("Failed to establish database connection.");
+            }
+            PreparedStatement prs = conn.prepareStatement(UPDATE_AUDIT);
+            prs.setInt(1, coutjrs);
+            prs.setInt(2, auditId);
+            int result = prs.executeUpdate();
+            str.append("Updated ").append(result).append(" audit with ID ");
+            return Response.ok("Update OK : ").build().toString();
+        } catch (SQLException e) {
+            throw e;
+        }
+    }
+    public String DelAudit(int AuditId) throws SQLException {
+        StringBuilder str = new StringBuilder();
+        try (Connection conn = this.getConnection();
+             PreparedStatement prs = conn.prepareStatement(DELETE_AUDIT)) {
+            prs.setInt(1, AuditId);
+            int Dele = prs.executeUpdate();
+            if (Dele == 0) {
+                return "Aucunne Audit trouvé avec cet identifiant : " + AuditId;
+            } else {
+                return "L'audit a été supprimée avec succès";
+            }
+        } catch (SQLException e) {
+            if (e.getMessage().contains("La contrainte de clé étrangère échoue")) {
+                return "Impossible de supprimer l'entité car elle a des dépendances.";
+            } else {
+                throw new RuntimeException(e);
+            }
         }
     }
 }
