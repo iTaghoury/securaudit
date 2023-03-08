@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 public class AuditDA extends DataAccess {
 
+    //region QUERY STRINGS
     private static final String SELECT_AUDIT = "SELECT * FROM Audit";
     private static final String SELECT_AUDIT_parId = "SELECT * FROM Audit WHERE idAudit = ?";
     private static final String INSERT_AUDIT = "INSERT INTO Audit (dateAudit,dureeAudit,coutJour,idIndustrie,idAuditeur) VALUE(?,?,?,?,?)";
@@ -15,8 +16,37 @@ public class AuditDA extends DataAccess {
     private static final String DELETE_AUDIT_BYID = "DELETE FROM audit where idAudit = ?";
     private final String CHECK_FOR_FRAIS_QUERY = "SELECT * FROM Audit INNER JOIN Frais ON Audit.idAudit = Frais.idAudit WHERE Audit.idAudit = ?";
 
-    public AuditDA() throws SQLException {}
+    //endregion
 
+    //region CONSTRUCTOR
+    public AuditDA() {
+        super();
+    }
+
+    //endregion
+
+    //region CREATE QUERY
+
+    public String insertAudit(Audit audit) throws SQLException {
+        try(PreparedStatement prs = this.getConnection().prepareStatement(INSERT_AUDIT, Statement.RETURN_GENERATED_KEYS)){
+            prs.setDate(1, audit.getDateAudit());
+            prs.setInt(2, audit.getDureeAudit());
+            prs.setInt(3, audit.getCoutJour());
+            prs.setInt(4, audit.getIdIndustrie());
+            prs.setInt(5, audit.getIdAuditeur());
+            prs.executeUpdate();
+            try(ResultSet rs = prs.getGeneratedKeys()) {
+                if(rs.next()) {
+                    return String.format("Ajout de l'audit réussi, id = %d", rs.getInt(1));
+                }
+            }
+        }
+        return "Échec de l'ajout";
+    }
+
+    //endregion
+
+    //region READ QUERIES
     public ArrayList<Audit> getAllAudits() throws SQLException {
         ArrayList<Audit> audits = new ArrayList<>();
         try (PreparedStatement stmt = this.getConnection().prepareStatement(SELECT_AUDIT);
@@ -52,22 +82,9 @@ public class AuditDA extends DataAccess {
             }
         }
     }
-    public String insertAudit(Audit audit) throws SQLException {
-        try(PreparedStatement prs = this.getConnection().prepareStatement(INSERT_AUDIT, Statement.RETURN_GENERATED_KEYS)){
-            prs.setDate(1, audit.getDateAudit());
-            prs.setInt(2, audit.getDureeAudit());
-            prs.setInt(3, audit.getCoutJour());
-            prs.setInt(4, audit.getIdIndustrie());
-            prs.setInt(5, audit.getIdAuditeur());
-            prs.executeUpdate();
-            try(ResultSet rs = prs.getGeneratedKeys()) {
-                if(rs.next()) {
-                    return String.format("Ajout de l'audit réussi, id = %d", rs.getInt(1));
-                }
-            }
-        }
-        return "Échec de l'ajout";
-    }
+    //endregion
+
+    //region UPDATE QUERY
     public void updateAudit(Audit audit) throws IdNotFoundException, SQLException {
             try(PreparedStatement prs = this.getConnection().prepareStatement(UPDATE_AUDIT)){
                 this.getAuditById(audit.getIdAudit());
@@ -81,6 +98,9 @@ public class AuditDA extends DataAccess {
         }
     }
 
+    //endregion
+
+    //region DELETE QUERY
     public String deleteAuditById(int auditId) throws IdNotFoundException, SQLException {
         if(isUsedAsFK(auditId)) {
             throw new SQLException("Cannot delete Audit because of FK constraint");
@@ -93,6 +113,8 @@ public class AuditDA extends DataAccess {
             }
         }
     }
+
+    //endregion
 
     //region OTHER METHODS
 

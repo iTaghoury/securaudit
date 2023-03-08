@@ -2,7 +2,6 @@ package fr.m2i.securauditgroupe1.data;
 
 import fr.m2i.securauditgroupe1.exception.IdNotFoundException;
 import fr.m2i.securauditgroupe1.model.Industrie;
-import fr.m2i.securauditgroupe1.exception.IdNotFoundException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -84,6 +83,10 @@ public class IndustrieDA extends DataAccess implements AutoCloseable {
         }
     }
 
+    //endregion
+
+    //region DELETE INDUSTRIE
+
     public void deleteIndustrie(int idIndustrie) throws IdNotFoundException, SQLException {
         if(isInDB(idIndustrie)) {
             if(isUsed(idIndustrie)) {
@@ -98,9 +101,7 @@ public class IndustrieDA extends DataAccess implements AutoCloseable {
             throw new IdNotFoundException("Id not found");
         }
     }
-    //endregion
 
-    //region DELETE INDUSTRIE
     //endregion
 
     //region OTHER METHODS

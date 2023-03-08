@@ -9,18 +9,23 @@ import jakarta.ws.rs.NotFoundException;
 
 public class FraisDA extends DataAccess  implements AutoCloseable {
 
-    //creation de connexion
+    //region CONSTRUCTOR
     public FraisDA() {
         super();
     }
 
+    //endregion
+
+    //region QUERY STRINGS
     private String INSERT_FRAIS_QUERY = "INSERT INTO frais(dateFrais,estRembourse,montant,idAudit,idCategorie) VALUES (?,?,?,?,?)";
     private String SELECT_FRAIS_QUERY = "SELECT * FROM frais " ;
     private String UPDATE_FRAIS_QUERY = "UPDATE frais SET dateFrais= ?, estRembourse = ?,montant = ?, idAudit = ?, idCategorie = ? WHERE idFrais = ? ";
     private String DELETE_FRAIS_QUERY = "DELETE FROM frais WHERE idFrais = ?";
     private String SELECT_BY_ID_FRAIS_QUERY = "SELECT * FROM frais WHERE idFrais = ?";
 
+    //endregion
 
+    //region CREATE QUERY
     public String  insertionFrais(Frais frais) throws SQLException {
         String s = "";
         int i = 0;
@@ -44,6 +49,9 @@ public class FraisDA extends DataAccess  implements AutoCloseable {
 
     }
 
+    //endregion
+
+    //region READ QUERIES
     public ArrayList<Frais> selectFrais() throws SQLException {
 
         ArrayList<Frais> frais = new ArrayList<Frais>();
@@ -60,17 +68,30 @@ public class FraisDA extends DataAccess  implements AutoCloseable {
 
     }
 
-    public String deleteFrais(int idFrais) throws SQLException, IdNotFoundException{
-        String s= "";
+    public Frais selectByIdFrais(int idFrais) throws SQLException, IdNotFoundException {
 
-            PreparedStatement ps =  this.getConnection().prepareStatement(this.DELETE_FRAIS_QUERY);
-            ps.setInt(1, idFrais);
-            if(ps.executeUpdate() != 0)
-            return  " frais with id " + idFrais + " has been deleted ";
-            else throw new IdNotFoundException(" id Frais not found") ;
+        Frais frais = new Frais();
+
+
+
+
+        PreparedStatement ps =  this.getConnection().prepareStatement(this.SELECT_BY_ID_FRAIS_QUERY);
+        ps.setInt(1, idFrais);
+        ResultSet resultats = ps.executeQuery();
+        if(resultats.next()) {
+            frais = new Frais(resultats.getInt(1),resultats.getDate(2), resultats.getBoolean(3), resultats.getInt(4), resultats.getInt(5), resultats.getInt(6));
+        }else {
+            throw new IdNotFoundException(" Id Frais not found ");
+        }
+
+
+        return frais;
 
     }
 
+    //endregion
+
+    //region UPDATE QUERY
     public String updateFrais(Frais frais, int idFrais) throws SQLException, IdNotFoundException {
 
             PreparedStatement ps =  this.getConnection().prepareStatement(this.UPDATE_FRAIS_QUERY);
@@ -86,27 +107,23 @@ public class FraisDA extends DataAccess  implements AutoCloseable {
 
     }
 
+    //endregion
 
-    public Frais selectByIdFrais(int idFrais) throws SQLException, IdNotFoundException {
+    //region DELETE QUERY
 
-        Frais frais = new Frais();
+    public String deleteFrais(int idFrais) throws SQLException, IdNotFoundException{
+        String s= "";
 
-
-
-
-            PreparedStatement ps =  this.getConnection().prepareStatement(this.SELECT_BY_ID_FRAIS_QUERY);
-            ps.setInt(1, idFrais);
-            ResultSet resultats = ps.executeQuery();
-            if(resultats.next()) {
-                frais = new Frais(resultats.getInt(1),resultats.getDate(2), resultats.getBoolean(3), resultats.getInt(4), resultats.getInt(5), resultats.getInt(6));
-            }else {
-                throw new IdNotFoundException(" Id Frais not found ");
-            }
-
-
-        return frais;
+        PreparedStatement ps =  this.getConnection().prepareStatement(this.DELETE_FRAIS_QUERY);
+        ps.setInt(1, idFrais);
+        if(ps.executeUpdate() != 0)
+            return  " frais with id " + idFrais + " has been deleted ";
+        else throw new IdNotFoundException(" id Frais not found") ;
 
     }
+
+    //endregion
+
 
 }
 

@@ -14,10 +14,17 @@ public class DataAccess implements AutoCloseable {
         this.createConnection();
     }
 
-
+    /**
+     * Getter connexion
+     * @return l'objet Connection du DataAccess
+     */
     public Connection getConnection() {
         return connection;
     }
+
+    /**
+     * Creation de connexion
+     */
     private void createConnection() {
         try {
             DriverManager.registerDriver(new com.mysql.cj.jdbc.Driver());
@@ -26,6 +33,7 @@ public class DataAccess implements AutoCloseable {
             System.out.println(e.getMessage());
         }
     }
+
     /**
      * Ferme la connexion à la base de données
      * @throws SQLException

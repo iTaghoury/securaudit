@@ -20,10 +20,12 @@ public class AuditeurDA extends DataAccess implements AutoCloseable {
     private final String CHECK_FOR_AUDIT_QUERY = "SELECT * FROM Auditeur INNER JOIN Audit ON Auditeur.idAuditeur = Audit.idAuditeur WHERE Auditeur.idAuditeur = ?";
     //endregion
 
+    //region CONSTRUCTOR
     public AuditeurDA() {
         super();
     }
 
+    //endregion
 
     //region CREATE QUERY
 

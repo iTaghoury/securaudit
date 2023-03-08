@@ -6,8 +6,7 @@ public class Categorie {
     private String libelle;
 
     //region CONSTRUCTORS
-    public Categorie() {
-    }
+    public Categorie() {}
 
     public Categorie(String libelle) {
         this.libelle = libelle;
@@ -18,6 +17,9 @@ public class Categorie {
         this.id = id;
     }
 
+    //endregion
+
+    //region GETTERS SETTERS
     public int getId() {
         return id;
     }
@@ -33,6 +35,8 @@ public class Categorie {
     public void setLibelle(String libelle) {
         this.libelle = libelle;
     }
+
+    //endregion
 
     @Override
     public String toString() {

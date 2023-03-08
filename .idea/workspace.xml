@@ -9,11 +9,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2db8de0c-0008-44b2-820f-23274902769c" name="Changes" comment="Added status code NOT_FOUND to Categorie and Frais request responses">
+    <list default="true" id="2db8de0c-0008-44b2-820f-23274902769c" name="Changes" comment="Cleaned up Audit class files for consistency with the rest of the project">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/AuditResource.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/api/AuditResource.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditDA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/AuditeurDA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/CategorieDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/CategorieDA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/DataAccess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/DataAccess.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/FraisDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/FraisDA.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/IndustrieDA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/data/IndustrieDA.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/model/Audit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/model/Audit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/model/Categorie.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/model/Categorie.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/model/Frais.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/fr/m2i/securauditgroupe1/model/Frais.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -197,7 +203,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678272341586</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Cleaned up Audit class files for consistency with the rest of the project">
+      <created>1678279230439</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1678279230439</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,6 +231,7 @@
     <MESSAGE value="Initial commit" />
     <MESSAGE value="Cleaned up Audit classes, added postman requests JSON file" />
     <MESSAGE value="Added status code NOT_FOUND to Categorie and Frais request responses" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added status code NOT_FOUND to Categorie and Frais request responses" />
+    <MESSAGE value="Cleaned up Audit class files for consistency with the rest of the project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cleaned up Audit class files for consistency with the rest of the project" />
   </component>
 </project>

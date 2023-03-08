@@ -10,6 +10,8 @@ public class Audit {
     private int idIndustrie;
     private int idAuditeur;
 
+    //region CONSTRUCTORS
+
     public Audit(int idAudit, Date dateAudit, int dureeAudit, int coutJour, int idIndustrie, int IdAuditeur) {
         this.idAudit = idAudit;
         this.dateAudit = dateAudit;
@@ -27,6 +29,10 @@ public class Audit {
     }
 
     public Audit() {}
+
+    //endregion
+
+    //region GETTERS SETTERS
 
     public int getIdAudit() {
         return idAudit;
@@ -75,4 +81,6 @@ public class Audit {
     public void setIdAuditeur(int idAuditeur) {
         idAuditeur = idAuditeur;
     }
+
+    //endregion
 }

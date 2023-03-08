@@ -11,6 +11,8 @@ public class Frais {
     private int idAudit;
     private int idCategorie;
 
+    //region GETTERS SETTERS
+
     public int getIdFrais() {
         return idFrais;
     }
@@ -59,6 +61,10 @@ public class Frais {
         this.idCategorie = idCategorie;
     }
 
+    //endregion
+
+    //region CONSTRUCTORS
+
     public Frais(int idFrais, Date dateFrais, boolean estRembourse, int montant, int idAudit, int idCategorie) {
         this.idFrais = idFrais;
         this.dateFrais = dateFrais;
@@ -69,7 +75,6 @@ public class Frais {
     }
 
     public Frais(Date dateFrais, boolean estRembourse, int montant, int idAudit, int idCategorie) {
-        this.idFrais = idFrais;
         this.dateFrais = dateFrais;
         this.estRembourse = estRembourse;
         this.montant = montant;
@@ -77,19 +82,9 @@ public class Frais {
         this.idCategorie = idCategorie;
     }
 
-    /*
-    public Frais(Date dateFrais, boolean estRembourse, int montant, Audit audit, Categorie categorie) {
-        this.idFrais = idFrais;
-        this.dateFrais = dateFrais;
-        this.estRembourse = estRembourse;
-        this.montant = montant;
-        this.idAudit = audit.getIdAudit();
-        this.idCategorie = categorie.getIdCategorie;
-    }
-    */
+    public Frais() {}
 
-    public Frais() {
-    }
+    //endregion
 
     @Override
     public String toString() {
