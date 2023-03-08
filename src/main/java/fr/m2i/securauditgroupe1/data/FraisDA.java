@@ -2,7 +2,9 @@ package fr.m2i.securauditgroupe1.data;
 import java.sql.*;
 import java.util.ArrayList;
 
+import fr.m2i.securauditgroupe1.exception.IdNotFoundException;
 import fr.m2i.securauditgroupe1.model.Frais;
+import jakarta.ws.rs.NotFoundException;
 
 
 public class FraisDA extends DataAccess  implements AutoCloseable {
@@ -19,10 +21,10 @@ public class FraisDA extends DataAccess  implements AutoCloseable {
     private String SELECT_BY_ID_FRAIS_QUERY = "SELECT * FROM frais WHERE idFrais = ?";
 
 
-    public String  insertionFrais(Frais frais){
+    public String  insertionFrais(Frais frais) throws SQLException, IdNotFoundException {
         String s = "";
         int i = 0;
-        try{
+
             PreparedStatement ps = this.getConnection().prepareStatement(this.INSERT_FRAIS_QUERY, Statement.RETURN_GENERATED_KEYS);
             ps.setDate(1, frais.getDateFrais());
             ps.setBoolean(2, frais.getEstRembourse());
@@ -38,18 +40,14 @@ public class FraisDA extends DataAccess  implements AutoCloseable {
             }
              s = " new frais with id " + i + " has been added ";
 
-        } catch (SQLException e) {
-            s = e.getMessage();
-        }
         return s ;
 
     }
 
-    public ArrayList<Frais> selectFrais() {
+    public ArrayList<Frais> selectFrais() throws SQLException, IdNotFoundException {
 
         ArrayList<Frais> frais = new ArrayList<Frais>();
 
-        try {
 
             Statement stmt =  this.getConnection().createStatement();
             ResultSet resultats = stmt.executeQuery(this.SELECT_FRAIS_QUERY);
@@ -57,32 +55,24 @@ public class FraisDA extends DataAccess  implements AutoCloseable {
                 frais.add(new Frais(resultats.getInt(1),resultats.getDate(2), resultats.getBoolean(3), resultats.getInt(4), resultats.getInt(5), resultats.getInt(6)));
             }
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
 
         return frais;
 
     }
 
-    public String deleteFrais(int idFrais) {
+    public String deleteFrais(int idFrais) throws SQLException, IdNotFoundException{
         String s= "";
-        try {
 
             PreparedStatement ps =  this.getConnection().prepareStatement(this.DELETE_FRAIS_QUERY);
             ps.setInt(1, idFrais);
-            ps.executeUpdate();
-            s = " frais with id " + idFrais + " has been deleted ";
-        } catch (SQLException e) {
-             s= e.getMessage();
+            if(ps.executeUpdate() != 0)
+            return  " frais with id " + idFrais + " has been deleted ";
+            else throw new IdNotFoundException(" id Frais not found") ;
 
-        }
-        return  s;
     }
 
-    public String updateFrais(Frais frais, int idFrais)  {
-        String s = "";
-        try {
+    public String updateFrais(Frais frais, int idFrais) throws SQLException, IdNotFoundException {
+
             PreparedStatement ps =  this.getConnection().prepareStatement(this.UPDATE_FRAIS_QUERY);
             ps.setDate(1, frais.getDateFrais());
             ps.setBoolean(2, frais.getEstRembourse());
@@ -90,20 +80,18 @@ public class FraisDA extends DataAccess  implements AutoCloseable {
             ps.setInt(4, frais.getIdAudit());
             ps.setInt(5, frais.getIdCategorie());
             ps.setInt(6, idFrais);
-            ps.executeUpdate();
-            s =  " frais with id " + idFrais + " has been updated  ";
-        } catch (SQLException e) {
-            s = e.getMessage();
-        }
-        return s;
+            if(ps.executeUpdate() != 0)
+                return  " frais with id " + idFrais + " has been updated ";
+            else throw new IdNotFoundException(" id Frais not found") ;
+
     }
 
 
-    public Frais selectByIdFrais(int idFrais) {
+    public Frais selectByIdFrais(int idFrais) throws SQLException, IdNotFoundException {
 
         Frais frais = new Frais();
 
-        try {
+
 
 
             PreparedStatement ps =  this.getConnection().prepareStatement(this.SELECT_BY_ID_FRAIS_QUERY);
@@ -111,11 +99,10 @@ public class FraisDA extends DataAccess  implements AutoCloseable {
             ResultSet resultats = ps.executeQuery();
             if(resultats.next()) {
                 frais = new Frais(resultats.getInt(1),resultats.getDate(2), resultats.getBoolean(3), resultats.getInt(4), resultats.getInt(5), resultats.getInt(6));
+            }else {
+                throw new IdNotFoundException(" Id Frais not found ");
             }
 
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
 
         return frais;
 

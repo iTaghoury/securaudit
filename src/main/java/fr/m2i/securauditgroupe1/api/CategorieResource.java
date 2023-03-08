@@ -1,6 +1,7 @@
 package fr.m2i.securauditgroupe1.api;
 
 import fr.m2i.securauditgroupe1.data.CategorieDA;
+import fr.m2i.securauditgroupe1.exception.IdNotFoundException;
 import fr.m2i.securauditgroupe1.model.Categorie;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -36,7 +37,7 @@ public class CategorieResource {
                     .status(Response.Status.OK)
                     .entity(da.selectByIdCategorie(id))
                     .build();
-        } catch (SQLException e) {
+        } catch (SQLException| IdNotFoundException e) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
@@ -52,7 +53,7 @@ public class CategorieResource {
                     .status(Response.Status.OK)
                     .entity(da.deleteCategorie(id))
                     .build();
-        } catch (SQLException e) {
+        } catch (SQLException| IdNotFoundException e) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
@@ -88,7 +89,7 @@ public class CategorieResource {
                     .status(Response.Status.OK)
                     .entity(da.updateCategorie(Categorie,id))
                     .build();
-        } catch (SQLException e) {
+        } catch (SQLException | IdNotFoundException e) {
             return Response
                     .status(Response.Status.BAD_REQUEST)
                     .entity(e.getMessage())
