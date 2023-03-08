@@ -2,91 +2,75 @@ package fr.m2i.securauditgroupe1.data;
 
 import fr.m2i.securauditgroupe1.exception.IdNotFoundException;
 import fr.m2i.securauditgroupe1.model.Audit;
-import jakarta.ws.rs.core.Response;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class AuditDA extends DataAccess {
 
-    private static final String SELECT_AUDIT        = "SELECT * FROM audit";
-    private static final String SELECT_AUDIT_parId  = "SELECT * FROM audit WHERE idAudit = ?";
-    private static final String INSERT_AUDIT        = "INSERT INTO audit (dateAudit,dureeAudit,coutJour,idIndustrie,idAuditeur)" +
-            "VALUE(?,?,?,?,?)";
-    private static final String UPDATE_AUDIT        = "UPDATE audit SET dateAudit = ? ,dureeAudit = ?, coutJour = ?," +
-                                                      "idIndustrie = ?,idAuditeur = ?" +
-                                                         " " +
-                                                      "WHERE idAudit = ?";
-    private static final String DELETE_AUDIT_BYID       = "DELETE FROM audit where idAudit = ?";
+    private static final String SELECT_AUDIT = "SELECT * FROM Audit";
+    private static final String SELECT_AUDIT_parId = "SELECT * FROM Audit WHERE idAudit = ?";
+    private static final String INSERT_AUDIT = "INSERT INTO Audit (dateAudit,dureeAudit,coutJour,idIndustrie,idAuditeur) VALUE(?,?,?,?,?)";
+    private static final String UPDATE_AUDIT = "UPDATE Audit SET dateAudit = ? , dureeAudit = ?, coutJour = ?, idIndustrie = ?,idAuditeur = ? WHERE idAudit = ?";
+    private static final String DELETE_AUDIT_BYID = "DELETE FROM audit where idAudit = ?";
+    private final String CHECK_FOR_FRAIS_QUERY = "SELECT * FROM Audit INNER JOIN Frais ON Audit.idAudit = Frais.idAudit WHERE Audit.idAudit = ?";
 
-    public AuditDA() throws SQLException {
-    }
+    public AuditDA() throws SQLException {}
 
-    public String getAllAudits() {
-
-        StringBuilder result = new StringBuilder();
-        try (
-             PreparedStatement stmt = this.getConnection().prepareStatement(SELECT_AUDIT);
+    public ArrayList<Audit> getAllAudits() throws SQLException {
+        ArrayList<Audit> audits = new ArrayList<>();
+        try (PreparedStatement stmt = this.getConnection().prepareStatement(SELECT_AUDIT);
              ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
-                result.append(String.format(
-                        "idAudit : %s, dateAudit : %s, dureeAudit : %s, coutJour : %s, idIndustrie: %s,idAuditeur :%s\n",
-                        rs.getInt("idAudit"),
-                        rs.getDate("dateAudit"),
-                        rs.getInt("dureeAudit"),
-                        rs.getInt("coutJour"),
-                        rs.getInt("idIndustrie"),
-                        rs.getInt("idAuditeur"))
-                );
-
+                Audit audit = new Audit(rs.getInt("idAudit"),
+                                        rs.getDate("dateAudit"),
+                                        rs.getInt("dureeAudit"),
+                                        rs.getInt("coutJour"),
+                                        rs.getInt("idIndustrie"),
+                                        rs.getInt("idAuditeur"));
+                audits.add(audit);
             }
-        } catch (SQLException e) {
-            throw new RuntimeException("Impossible de récupérer les audit", e);
+            return audits;
         }
-        return result.toString();
     }
 
 
-    public  String AuditparId(int userId) throws IdNotFoundException {
-        StringBuilder str = new StringBuilder();
-        try (PreparedStatement prs = this.getConnection().prepareStatement(SELECT_AUDIT_parId);) {
+    public Audit getAuditById(int userId) throws IdNotFoundException, SQLException {
+        try (PreparedStatement prs = this.getConnection().prepareStatement(SELECT_AUDIT_parId)) {
             prs.setInt(1, userId);
             ResultSet rs = prs.executeQuery();
             if (rs.next()) {
-                str.append(String.format(
-                        "idAudit : %s, dateAudit : %s, dureeAudit : %s, coutJour : %s, idIndustrie: %s,idAuditeur :%s\n",
-                        rs.getInt(1),
-                        rs.getDate(2),
-                        rs.getInt(3),
-                        rs.getInt(4),
-                        rs.getInt(5),
-                        rs.getInt(6)
-                ));
+                Audit audit = new Audit(rs.getInt("idAudit"),
+                                        rs.getDate("dateAudit"),
+                                        rs.getInt("dureeAudit"),
+                                        rs.getInt("coutJour"),
+                                        rs.getInt("idIndustrie"),
+                                        rs.getInt("idAuditeur"));
+                return audit;
             } else  {
                     throw new IdNotFoundException("Audit Id not found");
-                }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+            }
         }
-        return str.toString();
     }
-    public String insertaudit(Audit audit) throws SQLException {
-        try(
-                Connection conn = this.getConnection()){
-            PreparedStatement prs = conn.prepareStatement(INSERT_AUDIT);
+    public String insertAudit(Audit audit) throws SQLException {
+        try(PreparedStatement prs = this.getConnection().prepareStatement(INSERT_AUDIT, Statement.RETURN_GENERATED_KEYS)){
             prs.setDate(1, audit.getDateAudit());
             prs.setInt(2, audit.getDureeAudit());
             prs.setInt(3, audit.getCoutJour());
             prs.setInt(4, audit.getIdIndustrie());
             prs.setInt(5, audit.getIdAuditeur());
             prs.executeUpdate();
-            return Response.ok("L'Audit a été ajoutée : ").build().toString();
+            try(ResultSet rs = prs.getGeneratedKeys()) {
+                if(rs.next()) {
+                    return String.format("Ajout de l'audit réussi, id = %d", rs.getInt(1));
+                }
+            }
         }
+        return "Échec de l'ajout";
     }
     public void updateAudit(Audit audit) throws IdNotFoundException, SQLException {
             try(PreparedStatement prs = this.getConnection().prepareStatement(UPDATE_AUDIT)){
-                String foundAudit = this.AuditparId(audit.getIdAudit());
+                this.getAuditById(audit.getIdAudit());
                 prs.setDate(1, audit.getDateAudit());
                 prs.setInt(2, audit.getDureeAudit());
                 prs.setInt(3, audit.getCoutJour());
@@ -94,30 +78,34 @@ public class AuditDA extends DataAccess {
                 prs.setInt(5, audit.getIdAuditeur());
                 prs.setInt(6, audit.getIdAudit());
                 prs.executeUpdate();
-
-        } catch (SQLException e) {
-            throw e;
         }
     }
 
-    public String DelAudit(int AuditId) throws SQLException {
-        StringBuilder str = new StringBuilder();
-        try (Connection conn = this.getConnection();
-             PreparedStatement prs = conn.prepareStatement(DELETE_AUDIT_BYID)) {
-            prs.setInt(1, AuditId);
-            int Dele = prs.executeUpdate();
-            if (Dele == 0) {
-                return Response.status(404).entity("Aucun audit trouvé pour l'utilisateur avec l'identifiant "+ AuditId).build().toString();
-            } else {
-                return Response.ok("L'audit a été supprimée avec succès").toString();
-            }
-        } catch (SQLException e) {
-            if (e.getMessage().contains("La contrainte de clé étrangère échoue")) {
-                return "Impossible de supprimer l'entité car elle a des dépendances.";
-            } else {
-                throw new RuntimeException(e);
+    public String deleteAuditById(int auditId) throws IdNotFoundException, SQLException {
+        if(isUsedAsFK(auditId)) {
+            throw new SQLException("Cannot delete Audit because of FK constraint");
+        } else {
+            Audit foundAudit = this.getAuditById(auditId);
+            try (PreparedStatement prs = this.getConnection().prepareStatement(DELETE_AUDIT_BYID)) {
+                prs.setInt(1, auditId);
+                prs.executeUpdate();
+                return String.format("Deleted Audit with id %d", foundAudit.getIdAudit());
             }
         }
     }
+
+    //region OTHER METHODS
+
+    public boolean isUsedAsFK(int id) throws SQLException{
+        try(PreparedStatement ps = this.getConnection().prepareStatement(CHECK_FOR_FRAIS_QUERY)) {
+            ps.setInt(1, id);
+            try(ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        }
+    }
+
+    //endregion
+
 }
 

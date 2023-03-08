@@ -8,65 +8,75 @@ import fr.m2i.securauditgroupe1.model.Audit;
 import jakarta.ws.rs.core.Response;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
 
 
-@Path("/execute")
+@Path("/audit")
 public class AuditResource {
-
-   private AuditDA auditDA = new AuditDA();
-
-   public AuditResource() throws SQLException {
-   }
-
    @GET
-   @Path("/audits")
    @Produces(MediaType.APPLICATION_JSON)
-   public String getAllAudits() {
-      StringBuilder str = new StringBuilder();
-      //for(Audit a : auditDA.getAllAudits()){
-      str.append(auditDA.getAllAudits());
-      //}
-      return str.toString();
-   }
-
-   @GET
-   @Path("/auditparid/{auditId}")
-   @Produces(MediaType.APPLICATION_JSON)
-   public String getAuditparId(@PathParam("auditId") int auditId) {
-      StringBuilder result = new StringBuilder();
+   public Response getAllAudits() {
       try(AuditDA da = new AuditDA()) {
-         result.append(da.AuditparId(auditId));
-      } catch (IdNotFoundException e) {
-         return e.getMessage();
+         return Response
+                 .status(Response.Status.OK)
+                 .entity(da.getAllAudits())
+                 .build();
+      } catch (SQLException e) {
+         return Response
+                 .status(Response.Status.INTERNAL_SERVER_ERROR)
+                 .entity(e.getMessage())
+                 .build();
       }
-      catch (SQLException e) {
-         return e.getMessage();
+   }
+
+   @GET
+   @Path("/{id}")
+   @Produces(MediaType.APPLICATION_JSON)
+   public Response getAuditparId(@PathParam("id") int auditId) {
+      try(AuditDA da = new AuditDA()) {
+         return Response
+                 .status(Response.Status.OK)
+                 .entity(da.getAuditById(auditId))
+                 .build();
+      } catch (IdNotFoundException e){
+         return Response
+                 .status(Response.Status.NOT_FOUND)
+                 .entity(e.getMessage())
+                 .build();
+      } catch (SQLException e) {
+         return Response
+                 .status(Response.Status.INTERNAL_SERVER_ERROR)
+                 .entity(e.getMessage())
+                 .build();
       }
-      return result.toString();
+
    }
 
    @POST
    @Path("/insert")
    @Produces(MediaType.APPLICATION_JSON)
-   public String InsertAudit(@FormParam("dateAudit") Date dateaudit,
-                             @FormParam("dureeAudit") int dureeaudit,
-                             @FormParam("coutAudit") int coutaudit,
-                             @FormParam("Idindustrie") int idindustrie,
-                             @FormParam("IdAuditeur") int idAuditeur) throws SQLException {
-      StringBuilder result = new StringBuilder();
-      Audit audit = new Audit(dateaudit, dureeaudit, coutaudit, idindustrie, idAuditeur);
-      try (AuditDA da = new AuditDA()) {
-         result.append(da.insertaudit(audit));
+   public Response InsertAudit(@FormParam("dateAudit") Date dateaudit,
+                               @FormParam("dureeAudit") int dureeaudit,
+                               @FormParam("coutAudit") int coutAudit,
+                               @FormParam("idindustrie") int idIndustrie,
+                               @FormParam("idAuditeur") int idAuditeur) {
+      try(AuditDA da = new AuditDA()) {
+         Audit audit = new Audit(dateaudit, dureeaudit, coutAudit, idIndustrie, idAuditeur);
+         return Response
+                 .status(Response.Status.OK)
+                 .entity(da.insertAudit(audit))
+                 .build();
+      } catch (SQLException e) {
+         return Response
+                 .status(Response.Status.INTERNAL_SERVER_ERROR)
+                 .entity(e.getMessage())
+                 .build();
       }
-      return result.toString();
    }
 
    @PUT
    @Path("/update")
    @Produces(MediaType.APPLICATION_JSON)
-   public Response updateAuditREST(@FormParam("auditId") int auditId,
+   public Response updateAuditREST(@QueryParam("id") int auditId,
                                    @FormParam("dateAudit") Date dateaudit,
                                    @FormParam("dureeAudit") int dureeaudit,
                                    @FormParam("coutAudit") int coutaudit,
@@ -85,22 +95,33 @@ public class AuditResource {
                  .entity(e.getMessage())
                  .build();
       } catch (SQLException e) {
-         return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity(e.getMessage()).build();
+         return Response
+                 .status(Response.Status.INTERNAL_SERVER_ERROR)
+                 .entity(e.getMessage())
+                 .build();
       }
    }
 
    @DELETE
-   @Path("/deleaudit/{AuditId}")
+   @Path("/delete")
    @Produces(MediaType.APPLICATION_JSON)
-   public String deleteAudit(@PathParam("AuditId") int AuditId){
-      StringBuilder str = new StringBuilder();
+   public Response deleteAudit(@QueryParam("id") int auditId){
       try (AuditDA da = new AuditDA()) {
-         str.append(da.DelAudit(AuditId));
+         return Response
+                 .status(Response.Status.OK)
+                 .entity(da.deleteAuditById(auditId))
+                 .build();
+      } catch (IdNotFoundException e){
+         return Response
+                 .status(Response.Status.NOT_FOUND)
+                 .entity(e.getMessage())
+                 .build();
       } catch (SQLException e) {
-         str.append("Erreur lors de la suppression de l'audit : ");
-         str.append(e.getMessage());
+         return Response
+                 .status(Response.Status.INTERNAL_SERVER_ERROR)
+                 .entity(e.getMessage())
+                 .build();
       }
-      return str.toString();
    }
 
 }

@@ -4,11 +4,11 @@ import java.sql.Date;
 
 public class Audit {
     private int idAudit;
-    private static Date dateAudit;
-    private static int dureeAudit;
-    private static int coutJour;
-    private static int idIndustrie;
-    private static int IdAuditeur;
+    private Date dateAudit;
+    private int dureeAudit;
+    private int coutJour;
+    private int idIndustrie;
+    private int idAuditeur;
 
     public Audit(int idAudit, Date dateAudit, int dureeAudit, int coutJour, int idIndustrie, int IdAuditeur) {
         this.idAudit = idAudit;
@@ -16,20 +16,17 @@ public class Audit {
         this.dureeAudit = dureeAudit;
         this.coutJour = coutJour;
         this.idIndustrie = idIndustrie;
-        this.IdAuditeur = IdAuditeur;
+        this.idAuditeur = IdAuditeur;
     }
     public Audit( Date dateAudit, int dureeAudit, int coutJour, int idIndustrie, int IdAuditeur) {
-
         this.dateAudit = dateAudit;
         this.dureeAudit = dureeAudit;
         this.coutJour = coutJour;
         this.idIndustrie = idIndustrie;
-        this.IdAuditeur = IdAuditeur;
+        this.idAuditeur = IdAuditeur;
     }
 
-    public Audit() {
-        
-    }
+    public Audit() {}
 
     public int getIdAudit() {
         return idAudit;
@@ -72,10 +69,10 @@ public class Audit {
     }
 
     public  int getIdAuditeur() {
-        return IdAuditeur;
+        return idAuditeur;
     }
 
     public void setIdAuditeur(int idAuditeur) {
-        IdAuditeur = idAuditeur;
+        idAuditeur = idAuditeur;
     }
 }
